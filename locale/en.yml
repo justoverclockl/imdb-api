@@ -1,0 +1,7 @@
+justoverclock-imdb-api:
+  admin:
+    apiKeyTitle: Api Key (url)
+    apiKeyTitle-help: Get your FREE Api key on <a>https://www.omdbapi.com/apikey.aspx</a>
+                      and paste here the URL sent through email
+                      (e.g. "https://www.omdbapi.com/?apikey=f500aj11")
+  forum:

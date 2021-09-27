@@ -1,0 +1,39 @@
+{
+    "name": "justoverclock/imdb-api",
+    "description": "Integrate Flarum with Imdb api to get movie information inside the posts",
+    "keywords": [
+        "imdb api",
+        "imdb movie database"
+    ],
+    "type": "flarum-extension",
+    "license": "MIT",
+    "require": {
+        "flarum/core": "^1.0.0"
+    },
+    "require-dev": {
+        "flarum/testing": "^1.0.0"
+    },
+    "authors": [
+        {
+            "name": "Marco Colia",
+            "email": "info@flarum.it",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Justoverclock\\ImdbApi\\": "src/"
+        }
+    },
+    "extra": {
+        "flarum-extension": {
+            "title": "Imdb Api - Movie Database",
+            "category": "",
+            "icon": {
+                "name": "fas fa-film",
+                "backgroundColor": "red",
+                "color": "white"
+            }
+        }
+    }
+}
