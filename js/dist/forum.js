@@ -116,28 +116,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/forum/components/CommentPost */ "flarum/forum/components/CommentPost");
 /* harmony import */ var flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/forum/components/DiscussionHero */ "flarum/forum/components/DiscussionHero");
+/* harmony import */ var flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('justoverclock/imdb-api', function () {
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'footerItems', function (items) {
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'items', function (items) {
     items.add('movie search', m('div', {
       className: 'wrapper'
-    }, [m('form', {
-      className: 'form-inline',
-      name: 'search-imdb'
-    }, m('div', {
-      className: 'form-group'
-    }, [m('input', {
-      className: 'form-control',
-      id: 'search',
-      type: 'text',
-      placeholder: 'Find movie title'
-    }), m('input', {
-      className: 'btn btn-default',
-      type: 'submit',
-      value: 'Go!'
-    })])), m('div', {
+    }, [m('div', {
       className: 'flip-container',
       onclick: 'toggleDetails()'
     }, m('div', {
@@ -147,53 +136,47 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('justov
     }, m('div', {
       className: 'movie',
       id: 'moviePoster'
-    }, m('div', {
-      className: 'instructions'
-    }, 'Search for a film and get back the most popular one'))), m('div', {
+    })), m('div', {
       className: 'f back'
     }, m('div', {
       className: 'movie',
       id: 'movieDetails'
     }, m('div', {
       className: 'instructions'
-    }, 'lets try it')))]))]));
+    })))]))]));
   });
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'oncreate', function () {
-    $('form[name="search-imdb"]').on('submit', function (e) {
-      var movieTitle = $('input[id="search"]').val();
-      e.preventDefault();
-      $.ajax({
-        url: 'https://www.omdbapi.com/?apikey=f4e09aec&&t=' + movieTitle,
-        type: 'GET',
-        crossDomain: true,
-        dataType: 'jsonp',
-        success: function success(data) {
-          if (data.Response == 'False') {
-            alert('We can\'t seeem to find this movie. Please try again.');
-          } else {
-            showMovie(data);
-          }
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'oncreate', function () {
+    var discTitleMovie = this.attrs.discussion.title();
+    $.ajax({
+      url: 'https://www.omdbapi.com/?apikey=f4e09aec&&t=' + discTitleMovie,
+      type: 'GET',
+      crossDomain: true,
+      dataType: 'jsonp',
+      success: function success(data) {
+        if (data.Response == 'False') {
+          return;
+        } else {
+          showMovie(data);
         }
-      });
+      }
     });
-
-    function showMovie(movie) {
-      var movieHtml = {
-        title: "<h1 id=\"title\">" + movie.Title + " (" + movie.Year + ")</h1>",
-        poster: "<img id=\"poster\" src=\"" + movie.Poster + "\"/>",
-        imdbRating: "<div id=\"imdb\"><i class=\"fa fa-imdb\" aria-hidden=\"true\"></i>" + movie.imdbRating + "</div>",
-        plot: "<p id=\"plot\">" + movie.Plot + " <span id=\"mpaa\">Rated " + movie.Rated + ".<span></p>",
-        imdbLink: "<a id=\"imdbLink\" href=\"http://www.imdb.com/title/" + movie.imdbID + "/\" target=\"_blank\">See IMDb</a>"
-      };
-      var detailsHtml = movieHtml.title + movieHtml.imdbRating + movieHtml.plot + movieHtml.imdbLink;
-      $('#moviePoster').html(movieHtml.poster);
-      $('#movieDetails').html(detailsHtml);
-    }
-
-    function toggleDetails() {
-      $('.flip-container').toggleClass('active');
-    }
   });
+
+  function showMovie(movie) {
+    var movieHtml = {
+      title: "<h1 class=\"movieTitleHero\" id=\"title\">" + movie.Title + " (" + movie.Year + ")</h1>",
+      poster: "<img id=\"poster\" src=\"" + movie.Poster + "\"/>",
+      plot: "<p id=\"plot\">" + movie.Plot + " <span id=\"mpaa\">Rated " + movie.Rated + ".<span></p>",
+      imdbRating: "<div id=\"imdb\">Rated on ImdB:<i class=\"fa fa-imdb\" aria-hidden=\"true\"></i>" + movie.imdbRating + "</div>"
+    };
+    var detailsHtml = movieHtml.title + movieHtml.imdbRating + movieHtml.plot;
+    $('#moviePoster').html(movieHtml.poster);
+    $('#movieDetails').html(detailsHtml);
+  }
+
+  function toggleDetails() {
+    $('.flip-container').toggleClass('active');
+  }
 });
 
 /***/ }),
@@ -228,6 +211,17 @@ module.exports = flarum.core.compat['forum/app'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['forum/components/CommentPost'];
+
+/***/ }),
+
+/***/ "flarum/forum/components/DiscussionHero":
+/*!************************************************************************!*\
+  !*** external "flarum.core.compat['forum/components/DiscussionHero']" ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = flarum.core.compat['forum/components/DiscussionHero'];
 
 /***/ })
 
