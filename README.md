@@ -14,6 +14,10 @@ A [Flarum](http://flarum.org) extension. Integrate Flarum with Imdb api to get m
  - Now simply copy your apikey (that is "f500aj11") and paste it into extension settings.
  - done!
 
+## How it works
+
+To get movie details, simply start a new discussion with the movie title (only that, for example "matrix reloaded"), and this extension will automatically shows the details in the discussion hero. Due to limit the api calls, this extension shows detail ONLY FOR REGISTERED USERS.
+
 ## Upcoming Feautures
  - Automatic translation of movie title and description based on user language
 
