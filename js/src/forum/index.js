@@ -24,10 +24,10 @@ app.initializers.add('justoverclock/imdb-api', () => {
     });
     extend(DiscussionHero.prototype, 'oncreate', function () {
         const discTitleMovie = this.attrs.discussion.title();
-        const imdbApiKey = app.forum.attribute('justoverclock-imdb-api.imdbKey')
+        const imdbApiKey = app.forum.attribute('justoverclock-imdb-api.imdbKey');
 
         $.ajax({
-            url: 'https://www.omdbapi.com/?apikey='+ imdbApiKey + '&&t=' + discTitleMovie,
+            url: 'https://www.omdbapi.com/?apikey=' + imdbApiKey + '&&t=' + discTitleMovie,
             type: 'GET',
             crossDomain: true,
             dataType: 'jsonp',
@@ -44,13 +44,19 @@ app.initializers.add('justoverclock/imdb-api', () => {
     function showMovie(movie) {
         const movieHtml = {
             title: `<h1 class="movieTitleHero" id="title">${movie.Title} (${movie.Year})</h1>`,
-            poster: `<img class="movieImage" id="poster" src="${movie.Poster}"/>`,
-            plot: `<p class="movieDescription" id="plot">${movie.Plot} <span><a id="imdbLink" rel="nofollow" title=${movie.Title} href="http://www.imdb.com/title/${movie.imdbID}/" target="_blank">Full info at IMDb</a></span><p id="mpaa">Rated ${movie.Rated}.</p>`,
-            imdbRating: `<div class="ratedOnImdb" id="imdb">Rated on ImdB:<i class="fa fa-imdb" aria-hidden="true"></i>${movie.imdbRating}</div>`,
+            poster: `<img class="movieImage" title="${movie.Title}" alt="${movie.Title}" id="poster" src="${movie.Poster}"/>`,
+            plot: `<p class="movieDescription" id="plot">${movie.Plot}
+                     <span>
+                       <a id="imdbLink" rel="nofollow" title=${movie.Title} href="http://www.imdb.com/title/${movie.imdbID}/" target="_blank">
+                        <i class="fas fa-link linktoimdb"></i>${app.translator.trans('justoverclock-imdb-api.forum.fullinfoAt')}
+                       </a>
+                     </span>
+                   </p>`,
+            imdbRating: `<div class="ratedOnImdb" id="imdb">${app.translator.trans('justoverclock-imdb-api.forum.rateonimdb')}:
+                            <i class="fas fa-star-half-alt movierated"></i>${movie.imdbRating}</div>`,
         };
         let detailsHtml = movieHtml.title + movieHtml.imdbRating + movieHtml.plot;
         $('#moviePoster').html(movieHtml.poster);
         $('#movieDetails').html(detailsHtml);
     }
-    
 });
