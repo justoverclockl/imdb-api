@@ -114,16 +114,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_app__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flarum/common/extend */ "flarum/common/extend");
 /* harmony import */ var flarum_common_extend__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/forum/components/CommentPost */ "flarum/forum/components/CommentPost");
-/* harmony import */ var flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_CommentPost__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flarum/forum/components/DiscussionHero */ "flarum/forum/components/DiscussionHero");
-/* harmony import */ var flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3__);
-
+/* harmony import */ var flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flarum/forum/components/DiscussionHero */ "flarum/forum/components/DiscussionHero");
+/* harmony import */ var flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
 flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('justoverclock/imdb-api', function () {
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'items', function (items) {
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'items', function (items) {
     items.add('movie search', m('div', {
       className: 'wrapper'
     }, [m('div', {
@@ -145,15 +142,16 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('justov
       className: 'instructions'
     })))]))]));
   });
-  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_3___default.a.prototype, 'oncreate', function () {
+  Object(flarum_common_extend__WEBPACK_IMPORTED_MODULE_1__["extend"])(flarum_forum_components_DiscussionHero__WEBPACK_IMPORTED_MODULE_2___default.a.prototype, 'oncreate', function () {
     var discTitleMovie = this.attrs.discussion.title();
+    var imdbApiKey = flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default.a.forum.attribute('justoverclock-imdb-api.imdbKey');
     $.ajax({
-      url: 'https://www.omdbapi.com/?apikey=f4e09aec&&t=' + discTitleMovie,
+      url: 'https://www.omdbapi.com/?apikey=' + imdbApiKey + '&&t=' + discTitleMovie,
       type: 'GET',
       crossDomain: true,
       dataType: 'jsonp',
       success: function success(data) {
-        if (data.Response == 'False') {
+        if (data.Response === 'False') {
           return;
         } else {
           showMovie(data);
@@ -165,17 +163,13 @@ flarum_forum_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('justov
   function showMovie(movie) {
     var movieHtml = {
       title: "<h1 class=\"movieTitleHero\" id=\"title\">" + movie.Title + " (" + movie.Year + ")</h1>",
-      poster: "<img id=\"poster\" src=\"" + movie.Poster + "\"/>",
-      plot: "<p id=\"plot\">" + movie.Plot + " <span id=\"mpaa\">Rated " + movie.Rated + ".<span></p>",
-      imdbRating: "<div id=\"imdb\">Rated on ImdB:<i class=\"fa fa-imdb\" aria-hidden=\"true\"></i>" + movie.imdbRating + "</div>"
+      poster: "<img class=\"movieImage\" id=\"poster\" src=\"" + movie.Poster + "\"/>",
+      plot: "<p class=\"movieDescription\" id=\"plot\">" + movie.Plot + " <span><a id=\"imdbLink\" rel=\"nofollow\" title=" + movie.Title + " href=\"http://www.imdb.com/title/" + movie.imdbID + "/\" target=\"_blank\">Full info at IMDb</a></span><p id=\"mpaa\">Rated " + movie.Rated + ".</p>",
+      imdbRating: "<div class=\"ratedOnImdb\" id=\"imdb\">Rated on ImdB:<i class=\"fa fa-imdb\" aria-hidden=\"true\"></i>" + movie.imdbRating + "</div>"
     };
     var detailsHtml = movieHtml.title + movieHtml.imdbRating + movieHtml.plot;
     $('#moviePoster').html(movieHtml.poster);
     $('#movieDetails').html(detailsHtml);
-  }
-
-  function toggleDetails() {
-    $('.flip-container').toggleClass('active');
   }
 });
 
@@ -200,17 +194,6 @@ module.exports = flarum.core.compat['common/extend'];
 /***/ (function(module, exports) {
 
 module.exports = flarum.core.compat['forum/app'];
-
-/***/ }),
-
-/***/ "flarum/forum/components/CommentPost":
-/*!*********************************************************************!*\
-  !*** external "flarum.core.compat['forum/components/CommentPost']" ***!
-  \*********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = flarum.core.compat['forum/components/CommentPost'];
 
 /***/ }),
 

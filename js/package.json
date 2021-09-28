@@ -5,6 +5,7 @@
   "prettier": "@flarum/prettier-config",
   "dependencies": {
     "@flarum/prettier-config": "^1.0.0",
+    "flarum": "^0.1.0-beta.16",
     "flarum-tsconfig": "^1.0.0",
     "flarum-webpack-config": "^1.0.0",
     "imdb-api": "^4.4.1",
@@ -14,10 +15,10 @@
   "devDependencies": {
     "prettier": "^2.3.0"
   },
-    "scripts": {
-        "dev": "webpack --mode development --watch",
-        "build": "webpack --mode production",
-        "format": "prettier --single-quote --trailing-comma es5 --print-width 150 --tab-width 4 --write src",
-        "format-check": "prettier --single-quote --trailing-comma es5 --print-width 150 --tab-width 4 --check src"
+  "scripts": {
+    "dev": "webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "format": "prettier --single-quote --trailing-comma es5 --print-width 150 --tab-width 4 --write src",
+    "format-check": "prettier --single-quote --trailing-comma es5 --print-width 150 --tab-width 4 --check src"
   }
 }

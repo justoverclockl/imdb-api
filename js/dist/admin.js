@@ -115,8 +115,8 @@ __webpack_require__.r(__webpack_exports__);
 
 flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default.a.initializers.add('justoverclock/imdb-api', function () {
   flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default.a.extensionData["for"]('justoverclock-imdb-api').registerSetting({
-    setting: 'justoverclock-imdb-api.apiKey',
-    name: 'justoverclock-imdb-api.apiKey',
+    setting: 'justoverclock-imdb-api.imdbKey',
+    name: 'justoverclock-imdb-api.imdbKey',
     type: 'URL',
     label: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('justoverclock-imdb-api.admin.apiKeyTitle'),
     help: flarum_admin_app__WEBPACK_IMPORTED_MODULE_0___default.a.translator.trans('justoverclock-imdb-api.admin.apiKeyTitle-help')
