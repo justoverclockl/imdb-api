@@ -9,7 +9,7 @@ app.initializers.add('justoverclock/imdb-api', () => {
             m('div', { className: 'wrapper' }, [
                 m(
                     'div',
-                    { className: 'flip-container', onclick: 'toggleDetails()' },
+                    { className: 'flip-container'},
                     m('div', { className: 'flipper' }, [
                         m('div', { className: 'f front' }, m('div', { className: 'movie', id: 'moviePoster' })),
                         m(
@@ -56,7 +56,8 @@ app.initializers.add('justoverclock/imdb-api', () => {
                      </span>
                    </p>`,
             imdbRating: `<div class="ratedOnImdb" id="imdb">${app.translator.trans('justoverclock-imdb-api.forum.rateonimdb')}:
-                            <i class="fas fa-star-half-alt movierated"></i>${movie.imdbRating}</div>`,
+                            <i class="fas fa-star-half-alt movierated"></i>${movie.imdbRating}
+                         </div>`,
         };
         let detailsHtml = movieHtml.title + movieHtml.imdbRating + movieHtml.plot;
         $('#moviePoster').html(movieHtml.poster);
