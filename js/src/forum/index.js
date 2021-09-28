@@ -24,21 +24,24 @@ app.initializers.add('justoverclock/imdb-api', () => {
     });
     extend(DiscussionHero.prototype, 'oncreate', function () {
         const discTitleMovie = this.attrs.discussion.title();
+        const isLoggedIn = app.session.user;
         const imdbApiKey = app.forum.attribute('justoverclock-imdb-api.imdbKey');
 
-        $.ajax({
+        if (isLoggedIn) {
+          $.ajax({
             url: 'https://www.omdbapi.com/?apikey=' + imdbApiKey + '&&t=' + discTitleMovie,
             type: 'GET',
             crossDomain: true,
             dataType: 'jsonp',
             success: function (data) {
-                if (data.Response === 'False') {
-                    return;
-                } else {
-                    showMovie(data);
-                }
+              if (data.Response === 'False') {
+                return;
+              } else {
+                showMovie(data);
+              }
             },
-        });
+          });
+        }
     });
 
     function showMovie(movie) {
