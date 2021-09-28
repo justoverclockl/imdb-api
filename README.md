@@ -14,6 +14,9 @@ A [Flarum](http://flarum.org) extension. Integrate Flarum with Imdb api to get m
  - Now simply copy your apikey (that is "f500aj11") and paste it into extension settings.
  - done!
 
+## Upcoming Feautures
+ - Automatic translation of movie title and description based on user language
+
 ## Installation
 
 Install with composer:
