@@ -20,6 +20,7 @@ To get movie details, simply start a new discussion with the movie title (only t
 
 ## Upcoming Feautures
  - Automatic translation of movie title and description based on user language
+ - Restrict api calls to a specifi tag (e.g. display movie info only in "Movie" tag)
 
 ## Installation
 
