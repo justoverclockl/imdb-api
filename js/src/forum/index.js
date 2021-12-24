@@ -45,6 +45,8 @@ app.initializers.add('justoverclock/imdb-api', () => {
     });
 
     function showMovie(movie) {
+      const el = document.querySelector('li.item-title');
+      el.style.display = 'none';
         const movieHtml = {
             title: `<h1 class="movieTitleHero" id="title">${movie.Title} (${movie.Year})</h1>`,
             poster: `<img class="movieImage" title="${movie.Title}" alt="${movie.Title}" id="poster" src="${movie.Poster}"/>`,
